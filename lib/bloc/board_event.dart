@@ -1,19 +1,21 @@
 part of 'board_bloc.dart';
 
-abstract class BoardEvent extends Equatable {
+abstract class BoardEvent {
   const BoardEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class MoveEvent extends BoardEvent {
   final Move move;
 
-  MoveEvent(this.move);
-
-  @override
-  List<Object> get props => [move];
+  const MoveEvent(this.move);
 }
 
-class RestartEvent extends BoardEvent {}
+class RestartEvent extends BoardEvent {
+  const RestartEvent();
+}
+
+class SelectEvent extends BoardEvent {
+  final Coordinates c;
+
+  const SelectEvent(this.c);
+}

@@ -1,19 +1,17 @@
 part of 'board_bloc.dart';
 
-abstract class BoardState extends Equatable {
-  const BoardState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class BoardInitial extends BoardState {}
-
-class BoardUpdated extends BoardState {
+abstract class BoardState {
   final Board board;
 
-  BoardUpdated(this.board);
+  const BoardState(this.board);
+}
 
-  @override
-  List<Object> get props => [board];
+class BoardUpdated extends BoardState {
+  const BoardUpdated(board) : super(board);
+}
+
+class IllegalMove extends BoardState {
+  final String message;
+
+  const IllegalMove(this.message, board) : super(board);
 }

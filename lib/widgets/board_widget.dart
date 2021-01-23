@@ -1,42 +1,28 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lunar_lockout/bloc/board_bloc.dart';
 import 'package:lunar_lockout/logic/board.dart';
 import 'package:lunar_lockout/widgets/field_widget.dart';
 
-class BoardWidget extends StatefulWidget {
-  final Board board;
-  final Stream<BoardEvent> eventStream;
-  final Function closeStream;
-
-  BoardWidget(
-      {@required this.board,
-      @required this.eventStream,
-      @required this.closeStream});
-
-  @override
-  _BoardWidgetState createState() => _BoardWidgetState(
-      board: board, eventStream: eventStream, closeStream: closeStream);
-}
-
-class _BoardWidgetState extends State<BoardWidget> {
-  Board board;
-  Stream<BoardEvent> eventStream;
-  Function closeStream;
-
-  _BoardWidgetState({this.board, this.eventStream, this.closeStream}) {
-    eventStream.listen((event) {
-      if (event is MoveEvent)
-        setState(() => board.moveSelected(event.move));
-      else
-        setState(() => board.restart());
-    });
-  }
+class BoardWidget extends StatelessWidget {
+  BoardWidget();
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<BoardBloc, BoardState>(
+      listener: (context, state) {
+        if (state is IllegalMove)
+          Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message)));
+      },
+      builder: (context, state) {
+        return buildBoard(state.board);
+      },
+      buildWhen: (previous, current) => !(current is IllegalMove),
+    );
+  }
+
+  Widget buildBoard(Board board) {
     return AspectRatio(
       aspectRatio: 1,
       child: LayoutBuilder(
@@ -58,7 +44,8 @@ class _BoardWidgetState extends State<BoardWidget> {
                         child: FieldWidget(
                           piece: board.getAt(c),
                           isGoal: board.isGoal(c),
-                          select: () => setState(() => board.selected = c),
+                          select: () => BlocProvider.of<BoardBloc>(context)
+                              .add(SelectEvent(c)),
                           framed: board.selected == c,
                         ),
                       ),
@@ -71,11 +58,5 @@ class _BoardWidgetState extends State<BoardWidget> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    closeStream();
   }
 }

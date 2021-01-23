@@ -56,22 +56,24 @@ class Board {
   //           goals: original.goals);
 
   /// Moves selected piece in direction [m]
-  void moveSelected(final Move m) {
+  int moveSelected(final Move m) {
     if (selected != null) {
-      print("moving piece at $selected $m");
-      move(selected, m);
+      // print("moving piece at $selected $m");
+      if (move(selected, m)) return 0; // MOVE SUCCESFUL
+      return 1; // MOVE ILLEGAL
     } else
-      print("No piece selected");
+      return 2; // NO PIECE SELECTED
   }
 
-  /// Moves the piece at [c] in direction [m]
-  void move(final Coordinates c, final Move m) {
+  /// Moves the piece at [c] in direction [m], returns true if move was legal
+  bool move(final Coordinates c, final Move m) {
     Coordinates newCoordinates = _getNewCoordinates(c, m);
-    if (newCoordinates == null) return;
+    if (newCoordinates == null || newCoordinates == c) return false;
     moves.add(m);
     moveds.add(c);
     _movePieceTo(c, newCoordinates);
     selected = newCoordinates;
+    return true;
   }
 
   /// Returns the [Coordinates] of the field that the piece in [c] would end up
@@ -94,6 +96,7 @@ class Board {
     setAt(currentPos, 0);
   }
 
+  /// Resets the board to the initial state
   void restart() {
     this.currentBoard = deepCopy(initialBoard);
     this.selected = getFirstPiece(initialBoard);
@@ -112,6 +115,10 @@ class Board {
 
   bool _boundariesRespected(Coordinates c) {
     return c.x < dim && c.x >= 0 && c.y < dim && c.y >= 0;
+  }
+
+  void select(Coordinates c) {
+    selected = c;
   }
 
   int getAt(Coordinates c) {

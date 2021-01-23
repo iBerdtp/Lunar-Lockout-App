@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lunar_lockout/bloc/board_bloc.dart';
 import 'package:lunar_lockout/logic/board.dart';
 import 'package:lunar_lockout/widgets/board_widget.dart';
@@ -15,54 +16,49 @@ void main() async {
     ..setAt(Coordinates(4, 0), 2)
     ..setAt(Coordinates(4, 3), 2)
     ..setAt(Coordinates(1, 4), 1);
-  runApp(GamePage(board: board));
+  runApp(MaterialApp(
+    title: "Lunar Lockout",
+    home: BlocProvider(
+      create: (context) => BoardBloc(board),
+      child: GamePage(board: board),
+    ),
+  ));
 }
 
 class GamePage extends StatelessWidget {
-  final StreamController<BoardEvent> eventStreamContoller;
   static const double padding = 10;
   final Board board;
 
-  GamePage({
-    @required this.board,
-  }) : this.eventStreamContoller = StreamController<BoardEvent>();
+  GamePage({@required this.board});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Lunar Lockout"),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () => eventStreamContoller.sink.add(RestartEvent()))
-          ],
-        ),
-        body: Column(
-          children: [
-            Flexible(
-              flex: 6,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: BoardWidget(
-                  board: board,
-                  eventStream: eventStreamContoller.stream,
-                  closeStream: () => eventStreamContoller.close(),
-                ),
-              ),
-            ),
-            Flexible(
-                flex: 4,
-                child: ButtonPadWidget(
-                    eventStreamSink: eventStreamContoller.sink)),
-          ],
-        ),
-        backgroundColor: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Lunar Lockout"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () =>
+                  BlocProvider.of<BoardBloc>(context).add(RestartEvent()))
+        ],
       ),
+      body: Column(
+        children: [
+          Flexible(
+            flex: 6,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: BoardWidget(),
+            ),
+          ),
+          Flexible(flex: 4, child: ButtonPadWidget()),
+        ],
+      ),
+      backgroundColor: Colors.black,
     );
   }
 }
