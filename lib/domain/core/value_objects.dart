@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lunar_lockout/domain/core/errors.dart';
 
 import 'package:lunar_lockout/domain/core/failures.dart';
 
@@ -7,6 +8,8 @@ import 'package:lunar_lockout/domain/core/failures.dart';
 abstract class ValueObject<T> {
   Either<ValueFailure<T>, T> get value;
   const ValueObject();
+
+  T getOrCrash() => value.fold((l) => throw UnexpectedValueError(l), id);
 
   @override
   bool operator ==(Object o) {
@@ -19,4 +22,6 @@ abstract class ValueObject<T> {
 
   @override
   String toString() => 'ValueObject(value: $value)';
+
+  bool isValid() => value.isRight();
 }
