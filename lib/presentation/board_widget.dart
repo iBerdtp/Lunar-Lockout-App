@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lunar_lockout/bloc/board_bloc.dart';
 import 'package:lunar_lockout/logic/board.dart';
-import 'package:lunar_lockout/widgets/field_widget.dart';
+import 'package:lunar_lockout/presentation/field_widget.dart';
 
 class BoardWidget extends StatelessWidget {
   BoardWidget();

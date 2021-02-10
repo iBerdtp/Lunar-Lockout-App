@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lunar_lockout/bloc/board_bloc.dart';
 import 'package:lunar_lockout/logic/board.dart';
-import 'package:lunar_lockout/widgets/board_widget.dart';
-import 'package:lunar_lockout/widgets/button_pad.dart';
+import 'package:lunar_lockout/presentation/board_widget.dart';
+import 'package:lunar_lockout/presentation/button_pad.dart';
 
 void main() async {
   // Board board = await Board.fromPuz(fileName: "moeilijk");

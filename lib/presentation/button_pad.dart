@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:lunar_lockout/bloc/board_bloc.dart';
-import 'package:lunar_lockout/widgets/buttons.dart';
+import 'package:lunar_lockout/presentation/buttons.dart';
 
 class ButtonPadWidget extends StatelessWidget {
   @override
