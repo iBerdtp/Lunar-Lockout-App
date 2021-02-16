@@ -1,10 +1,14 @@
+import 'package:injectable/injectable.dart';
 import 'package:lunar_lockout/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:lunar_lockout/domain/auth/i_auth_facade.dart';
+import 'package:lunar_lockout/domain/auth/user.dart';
 import 'package:lunar_lockout/domain/auth/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lunar_lockout/domain/core/value_objects.dart';
 
+@LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -65,7 +69,7 @@ class FirebaseAuthFacade implements IAuthFacade {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return left(AuthFailure.cancelledByUser());
+        return left(const AuthFailure.cancelledByUser());
       }
       final googleAuthentication = await googleUser.authentication;
       final authCredential = GoogleAuthProvider.credential(
@@ -77,5 +81,15 @@ class FirebaseAuthFacade implements IAuthFacade {
     } on FirebaseAuthException catch (_) {
       return left(const AuthFailure.serverError());
     }
+  }
+
+  @override
+  Future<Option<User>> getSignedInUser() => Future(optionOf(User(id: null)));
+  // optionOf(_firebaseAuth.currentUser?.uid);
+
+  @override
+  Future<void> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
   }
 }

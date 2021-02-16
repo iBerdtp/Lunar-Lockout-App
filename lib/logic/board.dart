@@ -33,21 +33,21 @@ class Board {
     return empty;
   }
 
-  static Future<Board> fromPuz({@required String fileName}) async {
-    String fromPuzString = await rootBundle.loadString("puzzles/fileName.puz");
-    List<String> contents = LineSplitter().convert(fromPuzString);
-    var dim = int.parse(contents[0]);
-    var initialBoard = List.generate(
-        dim, (y) => List.generate(dim, (x) => int.parse(contents[y + 1][x])));
-    var goals = List.empty();
-    for (int i = dim + 1; i < contents.length; i++) {
-      List<int> split = contents[i].split(" ").map(int.parse);
-      goals.add(Coordinates(split[0], split[1]));
-    }
-    Board board = Board._(dim: dim, initialBoard: initialBoard, goals: goals);
-    board.restart();
-    return board;
-  }
+  // static Future<Board> fromPuz({@required String fileName}) async {
+  //   final String fromPuzString = await rootBundle.loadString("puzzles/fileName.puz");
+  //   List<String> contents = LineSplitter().convert(fromPuzString);
+  //   final dim = int.parse(contents[0]);
+  //   final initialBoard = List.generate(
+  //       dim, (y) => List.generate(dim, (x) => int.parse(contents[y + 1][x])));
+  //   final goals = List.empty();
+  //   for (int i = dim + 1; i < contents.length; i++) {
+  //     final List<int> split = contents[i].split(" ").map(int.parse);
+  //     goals.add(Coordinates(split[0], split[1]));
+  //   }
+  //   Board board = Board._(dim: dim, initialBoard: initialBoard, goals: goals);
+  //   board.restart();
+  //   return board;
+  // }
 
   // Board.copy(Board original)
   //     : this(
@@ -149,6 +149,7 @@ class Board {
 }
 
 class Coordinates {
+  // TODO: const enzo, hoeft geen enum te zijn, iets met freezed
   final int x;
   final int y;
 

@@ -7,11 +7,11 @@ abstract class BoardState {
 }
 
 class BoardUpdated extends BoardState {
-  const BoardUpdated(board) : super(board);
+  const BoardUpdated(Board board) : super(board);
 }
 
 class IllegalMove extends BoardState {
   final String message;
 
-  const IllegalMove(this.message, board) : super(board);
+  const IllegalMove(this.message, Board board) : super(board);
 }
