@@ -10,7 +10,7 @@ import 'package:lunar_lockout/presentation/board_widget.dart';
 import 'package:lunar_lockout/presentation/button_pad.dart';
 import 'package:lunar_lockout/presentation/core/app_widget.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);
   await Firebase.initializeApp();
