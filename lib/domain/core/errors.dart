@@ -6,5 +6,6 @@ class UnexpectedValueError extends Error {
   UnexpectedValueError(this.valueFailure);
 
   @override
-  String toString() => Error.safeToString("ERROR. FAILURE: $valueFailure");
+  String toString() =>
+      Error.safeToString("VALUE ERROR. FAILURE: $valueFailure");
 }

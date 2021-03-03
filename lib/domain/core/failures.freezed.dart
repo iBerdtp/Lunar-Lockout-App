@@ -358,3 +358,490 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
   @JsonKey(ignore: true)
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith;
 }
+
+/// @nodoc
+class _$MoveFailureTearOff {
+  const _$MoveFailureTearOff();
+
+// ignore: unused_element
+  NoPieceToMove noPieceToMove({@required Coordinates coordinates}) {
+    return NoPieceToMove(
+      coordinates: coordinates,
+    );
+  }
+
+// ignore: unused_element
+  PieceCantMove pieceCantMove(
+      {@required Coordinates coordinates, @required Move move}) {
+    return PieceCantMove(
+      coordinates: coordinates,
+      move: move,
+    );
+  }
+
+// ignore: unused_element
+  NoPieceSelected noPieceSelected() {
+    return const NoPieceSelected();
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $MoveFailure = _$MoveFailureTearOff();
+
+/// @nodoc
+mixin _$MoveFailure {
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult noPieceToMove(Coordinates coordinates),
+    @required TResult pieceCantMove(Coordinates coordinates, Move move),
+    @required TResult noPieceSelected(),
+  });
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult noPieceToMove(Coordinates coordinates),
+    TResult pieceCantMove(Coordinates coordinates, Move move),
+    TResult noPieceSelected(),
+    @required TResult orElse(),
+  });
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult noPieceToMove(NoPieceToMove value),
+    @required TResult pieceCantMove(PieceCantMove value),
+    @required TResult noPieceSelected(NoPieceSelected value),
+  });
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult noPieceToMove(NoPieceToMove value),
+    TResult pieceCantMove(PieceCantMove value),
+    TResult noPieceSelected(NoPieceSelected value),
+    @required TResult orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $MoveFailureCopyWith<$Res> {
+  factory $MoveFailureCopyWith(
+          MoveFailure value, $Res Function(MoveFailure) then) =
+      _$MoveFailureCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$MoveFailureCopyWithImpl<$Res> implements $MoveFailureCopyWith<$Res> {
+  _$MoveFailureCopyWithImpl(this._value, this._then);
+
+  final MoveFailure _value;
+  // ignore: unused_field
+  final $Res Function(MoveFailure) _then;
+}
+
+/// @nodoc
+abstract class $NoPieceToMoveCopyWith<$Res> {
+  factory $NoPieceToMoveCopyWith(
+          NoPieceToMove value, $Res Function(NoPieceToMove) then) =
+      _$NoPieceToMoveCopyWithImpl<$Res>;
+  $Res call({Coordinates coordinates});
+
+  $CoordinatesCopyWith<$Res> get coordinates;
+}
+
+/// @nodoc
+class _$NoPieceToMoveCopyWithImpl<$Res> extends _$MoveFailureCopyWithImpl<$Res>
+    implements $NoPieceToMoveCopyWith<$Res> {
+  _$NoPieceToMoveCopyWithImpl(
+      NoPieceToMove _value, $Res Function(NoPieceToMove) _then)
+      : super(_value, (v) => _then(v as NoPieceToMove));
+
+  @override
+  NoPieceToMove get _value => super._value as NoPieceToMove;
+
+  @override
+  $Res call({
+    Object coordinates = freezed,
+  }) {
+    return _then(NoPieceToMove(
+      coordinates: coordinates == freezed
+          ? _value.coordinates
+          : coordinates as Coordinates,
+    ));
+  }
+
+  @override
+  $CoordinatesCopyWith<$Res> get coordinates {
+    if (_value.coordinates == null) {
+      return null;
+    }
+    return $CoordinatesCopyWith<$Res>(_value.coordinates, (value) {
+      return _then(_value.copyWith(coordinates: value));
+    });
+  }
+}
+
+/// @nodoc
+class _$NoPieceToMove with DiagnosticableTreeMixin implements NoPieceToMove {
+  const _$NoPieceToMove({@required this.coordinates})
+      : assert(coordinates != null);
+
+  @override
+  final Coordinates coordinates;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MoveFailure.noPieceToMove(coordinates: $coordinates)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MoveFailure.noPieceToMove'))
+      ..add(DiagnosticsProperty('coordinates', coordinates));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is NoPieceToMove &&
+            (identical(other.coordinates, coordinates) ||
+                const DeepCollectionEquality()
+                    .equals(other.coordinates, coordinates)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(coordinates);
+
+  @JsonKey(ignore: true)
+  @override
+  $NoPieceToMoveCopyWith<NoPieceToMove> get copyWith =>
+      _$NoPieceToMoveCopyWithImpl<NoPieceToMove>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult noPieceToMove(Coordinates coordinates),
+    @required TResult pieceCantMove(Coordinates coordinates, Move move),
+    @required TResult noPieceSelected(),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return noPieceToMove(coordinates);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult noPieceToMove(Coordinates coordinates),
+    TResult pieceCantMove(Coordinates coordinates, Move move),
+    TResult noPieceSelected(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPieceToMove != null) {
+      return noPieceToMove(coordinates);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult noPieceToMove(NoPieceToMove value),
+    @required TResult pieceCantMove(PieceCantMove value),
+    @required TResult noPieceSelected(NoPieceSelected value),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return noPieceToMove(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult noPieceToMove(NoPieceToMove value),
+    TResult pieceCantMove(PieceCantMove value),
+    TResult noPieceSelected(NoPieceSelected value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPieceToMove != null) {
+      return noPieceToMove(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NoPieceToMove implements MoveFailure {
+  const factory NoPieceToMove({@required Coordinates coordinates}) =
+      _$NoPieceToMove;
+
+  Coordinates get coordinates;
+  @JsonKey(ignore: true)
+  $NoPieceToMoveCopyWith<NoPieceToMove> get copyWith;
+}
+
+/// @nodoc
+abstract class $PieceCantMoveCopyWith<$Res> {
+  factory $PieceCantMoveCopyWith(
+          PieceCantMove value, $Res Function(PieceCantMove) then) =
+      _$PieceCantMoveCopyWithImpl<$Res>;
+  $Res call({Coordinates coordinates, Move move});
+
+  $CoordinatesCopyWith<$Res> get coordinates;
+}
+
+/// @nodoc
+class _$PieceCantMoveCopyWithImpl<$Res> extends _$MoveFailureCopyWithImpl<$Res>
+    implements $PieceCantMoveCopyWith<$Res> {
+  _$PieceCantMoveCopyWithImpl(
+      PieceCantMove _value, $Res Function(PieceCantMove) _then)
+      : super(_value, (v) => _then(v as PieceCantMove));
+
+  @override
+  PieceCantMove get _value => super._value as PieceCantMove;
+
+  @override
+  $Res call({
+    Object coordinates = freezed,
+    Object move = freezed,
+  }) {
+    return _then(PieceCantMove(
+      coordinates: coordinates == freezed
+          ? _value.coordinates
+          : coordinates as Coordinates,
+      move: move == freezed ? _value.move : move as Move,
+    ));
+  }
+
+  @override
+  $CoordinatesCopyWith<$Res> get coordinates {
+    if (_value.coordinates == null) {
+      return null;
+    }
+    return $CoordinatesCopyWith<$Res>(_value.coordinates, (value) {
+      return _then(_value.copyWith(coordinates: value));
+    });
+  }
+}
+
+/// @nodoc
+class _$PieceCantMove with DiagnosticableTreeMixin implements PieceCantMove {
+  const _$PieceCantMove({@required this.coordinates, @required this.move})
+      : assert(coordinates != null),
+        assert(move != null);
+
+  @override
+  final Coordinates coordinates;
+  @override
+  final Move move;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MoveFailure.pieceCantMove(coordinates: $coordinates, move: $move)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MoveFailure.pieceCantMove'))
+      ..add(DiagnosticsProperty('coordinates', coordinates))
+      ..add(DiagnosticsProperty('move', move));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is PieceCantMove &&
+            (identical(other.coordinates, coordinates) ||
+                const DeepCollectionEquality()
+                    .equals(other.coordinates, coordinates)) &&
+            (identical(other.move, move) ||
+                const DeepCollectionEquality().equals(other.move, move)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(coordinates) ^
+      const DeepCollectionEquality().hash(move);
+
+  @JsonKey(ignore: true)
+  @override
+  $PieceCantMoveCopyWith<PieceCantMove> get copyWith =>
+      _$PieceCantMoveCopyWithImpl<PieceCantMove>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult noPieceToMove(Coordinates coordinates),
+    @required TResult pieceCantMove(Coordinates coordinates, Move move),
+    @required TResult noPieceSelected(),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return pieceCantMove(coordinates, move);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult noPieceToMove(Coordinates coordinates),
+    TResult pieceCantMove(Coordinates coordinates, Move move),
+    TResult noPieceSelected(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (pieceCantMove != null) {
+      return pieceCantMove(coordinates, move);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult noPieceToMove(NoPieceToMove value),
+    @required TResult pieceCantMove(PieceCantMove value),
+    @required TResult noPieceSelected(NoPieceSelected value),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return pieceCantMove(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult noPieceToMove(NoPieceToMove value),
+    TResult pieceCantMove(PieceCantMove value),
+    TResult noPieceSelected(NoPieceSelected value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (pieceCantMove != null) {
+      return pieceCantMove(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PieceCantMove implements MoveFailure {
+  const factory PieceCantMove(
+      {@required Coordinates coordinates,
+      @required Move move}) = _$PieceCantMove;
+
+  Coordinates get coordinates;
+  Move get move;
+  @JsonKey(ignore: true)
+  $PieceCantMoveCopyWith<PieceCantMove> get copyWith;
+}
+
+/// @nodoc
+abstract class $NoPieceSelectedCopyWith<$Res> {
+  factory $NoPieceSelectedCopyWith(
+          NoPieceSelected value, $Res Function(NoPieceSelected) then) =
+      _$NoPieceSelectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NoPieceSelectedCopyWithImpl<$Res>
+    extends _$MoveFailureCopyWithImpl<$Res>
+    implements $NoPieceSelectedCopyWith<$Res> {
+  _$NoPieceSelectedCopyWithImpl(
+      NoPieceSelected _value, $Res Function(NoPieceSelected) _then)
+      : super(_value, (v) => _then(v as NoPieceSelected));
+
+  @override
+  NoPieceSelected get _value => super._value as NoPieceSelected;
+}
+
+/// @nodoc
+class _$NoPieceSelected
+    with DiagnosticableTreeMixin
+    implements NoPieceSelected {
+  const _$NoPieceSelected();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MoveFailure.noPieceSelected()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'MoveFailure.noPieceSelected'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is NoPieceSelected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult noPieceToMove(Coordinates coordinates),
+    @required TResult pieceCantMove(Coordinates coordinates, Move move),
+    @required TResult noPieceSelected(),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return noPieceSelected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult noPieceToMove(Coordinates coordinates),
+    TResult pieceCantMove(Coordinates coordinates, Move move),
+    TResult noPieceSelected(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPieceSelected != null) {
+      return noPieceSelected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult noPieceToMove(NoPieceToMove value),
+    @required TResult pieceCantMove(PieceCantMove value),
+    @required TResult noPieceSelected(NoPieceSelected value),
+  }) {
+    assert(noPieceToMove != null);
+    assert(pieceCantMove != null);
+    assert(noPieceSelected != null);
+    return noPieceSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult noPieceToMove(NoPieceToMove value),
+    TResult pieceCantMove(PieceCantMove value),
+    TResult noPieceSelected(NoPieceSelected value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPieceSelected != null) {
+      return noPieceSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NoPieceSelected implements MoveFailure {
+  const factory NoPieceSelected() = _$NoPieceSelected;
+}
