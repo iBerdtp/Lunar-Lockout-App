@@ -34,44 +34,47 @@ class Board {
           inactiveFields: const KtList.empty(),
         );
 
+  Board.standardBoard()
+      : this(
+          arrayDim: 5,
+          pieces: KtMap.from({
+            const Coordinates(0, 0): const Piece.pawn(),
+            const Coordinates(2, 0): const Piece.pawn(),
+            const Coordinates(4, 0): const Piece.pawn(),
+            const Coordinates(4, 3): const Piece.pawn(),
+            const Coordinates(1, 4): const Piece.shuttle(),
+          }),
+          goals: KtList.from([const Coordinates(2, 2)]),
+          inactiveFields: const KtList.empty(),
+        );
+
+  factory Board.fromJson(Map<String, dynamic> json) => _$BoardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BoardToJson(this);
+
   Board setAt(Coordinates c, Piece p) {
     assert(c != null);
     assert(p != null);
     assert(isWithinBounds(c));
     assert(!inactiveFields.contains(c));
-    return alter(
-      (map) => map[c] = p,
-    );
+    return copyWith(pieces: pieces + KtMap.from({c: p}));
   }
 
   Board removeAt(Coordinates c) {
     assert(c != null);
-    return alter(
-      (map) => map.remove(c),
-    );
+    return copyWith(pieces: pieces - c);
   }
 
   Board move(Coordinates from, Coordinates to) {
     assert(from != null);
     assert(to != null);
     assert(pieces.containsKey(from));
-    return alter(
-      (map) {
-        map[to] = map[from];
-        map.remove(from);
-      },
-    );
-  }
-
-  Board alter(void Function(Map<Coordinates, Piece>) f) {
-    final map = pieces.asMap();
-    f(map);
-    return copyWith(pieces: KtMap.from(map));
+    return setAt(to, pieces[from]).removeAt(from);
   }
 
   Option<Piece> getAt(Coordinates c) {
     assert(c.x >= 0 && c.x < arrayDim && c.y >= 0 && c.y < arrayDim);
-    assert(inactiveFields.contains(c));
+    assert(!inactiveFields.contains(c));
     assert(c != null);
     return optionOf(pieces.get(c));
   }

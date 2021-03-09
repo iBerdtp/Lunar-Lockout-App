@@ -8,11 +8,11 @@ import 'package:lunar_lockout/domain/game_logic/move.dart';
 abstract class Game {
   final Board _initialBoard;
   Board _currentBoard;
-  Option<MoveFailure> _moveFailure;
-  Option<Coordinates> selected;
+  Option<MoveFailure> _moveFailureOption;
+  Option<Coordinates> selectedOption;
 
   Board get currentBoard => _currentBoard;
-  Option<MoveFailure> get moveFailure => _moveFailure;
+  Option<MoveFailure> get moveFailureOption => _moveFailureOption;
 
   List<Move> _moves;
   List<Coordinates> _moveds;
@@ -29,8 +29,8 @@ abstract class Game {
   // Board validateBoard(Board board);
 
   void moveSelected(Move m) {
-    selected.fold(
-      () => _moveFailure = some(const MoveFailure.noPieceSelected()),
+    selectedOption.fold(
+      () => _moveFailureOption = some(const MoveFailure.noPieceSelected()),
       (c) => move(c, m),
     );
   }
@@ -38,17 +38,19 @@ abstract class Game {
   void move(Coordinates c, Move m) {
     final moveResult = simulateMove(c, m);
     moveResult.fold(
-      (f) => _moveFailure = some(f),
-      (b) {
-        _currentBoard = b;
+      (f) => _moveFailureOption = some(f),
+      (tup) {
+        _currentBoard = tup.value1;
+        selectedOption = some(tup.value2);
         _moves.add(m);
         _moveds.add(c);
-        _moveFailure = none();
+        _moveFailureOption = none();
       },
     );
   }
 
-  Either<MoveFailure, Board> simulateMove(Coordinates c, Move m) {
+  Either<MoveFailure, Tuple2<Board, Coordinates>> simulateMove(
+      Coordinates c, Move m) {
     assert(legalMoves.contains(m));
     if (!currentBoard.pieces.containsKey(c)) {
       return left(MoveFailure.noPieceToMove(coordinates: c));
@@ -61,8 +63,9 @@ abstract class Game {
       Coordinates scout = c.add(m);
       while (currentBoard.isWithinBounds(scout)) {
         if (currentBoard.pieces.containsKey(scout)) {
-          final newBoard = currentBoard.move(c, scout.sub(m));
-          return right(newBoard);
+          final newPos = scout.sub(m);
+          final newBoard = currentBoard.move(c, newPos);
+          return right(Tuple2(newBoard, newPos));
         }
         scout = scout.add(m);
       }
@@ -84,6 +87,9 @@ abstract class Game {
 
   void restart() {
     _currentBoard = _initialBoard;
-    selected = _initialBoard.getFirstPiece();
+    selectedOption = _initialBoard.getFirstPiece();
+    _moveFailureOption = none();
+    _moves = [];
+    _moveds = [];
   }
 }

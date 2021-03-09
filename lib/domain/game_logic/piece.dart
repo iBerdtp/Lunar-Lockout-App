@@ -6,7 +6,7 @@ part 'piece.g.dart';
 
 @freezed
 abstract class Piece with _$Piece {
-  const factory Piece.shuttle(Coordinates c) = Shuttle;
-  const factory Piece.pawn(Coordinates c) = Pawn;
+  const factory Piece.shuttle() = Shuttle;
+  const factory Piece.pawn() = Pawn;
   factory Piece.fromJson(Map<String, dynamic> json) => _$PieceFromJson(json);
 }

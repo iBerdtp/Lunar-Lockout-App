@@ -7,25 +7,14 @@ part of 'piece.dart';
 // **************************************************************************
 
 _$Shuttle _$_$ShuttleFromJson(Map<String, dynamic> json) {
-  return _$Shuttle(
-    json['c'] == null
-        ? null
-        : Coordinates.fromJson(json['c'] as Map<String, dynamic>),
-  );
+  return _$Shuttle();
 }
 
-Map<String, dynamic> _$_$ShuttleToJson(_$Shuttle instance) => <String, dynamic>{
-      'c': instance.c,
-    };
+Map<String, dynamic> _$_$ShuttleToJson(_$Shuttle instance) =>
+    <String, dynamic>{};
 
 _$Pawn _$_$PawnFromJson(Map<String, dynamic> json) {
-  return _$Pawn(
-    json['c'] == null
-        ? null
-        : Coordinates.fromJson(json['c'] as Map<String, dynamic>),
-  );
+  return _$Pawn();
 }
 
-Map<String, dynamic> _$_$PawnToJson(_$Pawn instance) => <String, dynamic>{
-      'c': instance.c,
-    };
+Map<String, dynamic> _$_$PawnToJson(_$Pawn instance) => <String, dynamic>{};

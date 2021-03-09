@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lunar_lockout/domain/core/errors.dart';
 import 'package:lunar_lockout/domain/core/failures.dart';
 import 'package:lunar_lockout/domain/game_logic/board.dart';
 import 'package:lunar_lockout/domain/game_logic/coordinates.dart';
@@ -17,65 +18,75 @@ part 'game_bloc.freezed.dart';
 
 @injectable
 class GameBloc extends Bloc<GameEvent, GameState> {
-  Game _game;
+  Option<Game> _gameOption;
 
-  GameBloc() : super(const GameState.noGame());
+  GameBloc() : super(const GameState.noGame()) {
+    _gameOption = none();
+  }
 
   @override
   Stream<GameState> mapEventToState(
     GameEvent event,
   ) async* {
-    state.when(
-      gameOn: (b, c, f) => event.when(
+    state.map(
+      gameOn: (_) => event.when(
         moveRequested: _requestMove,
         selectRequested: _requestSelect,
         restartRequested: _requestRestart,
         gameChangeRequested: _requestGameChange,
       ),
-      gameOver: (b) => event.when(
-        moveRequested: null,
-        selectRequested: null,
+      gameOver: (_) => event.when(
+        moveRequested: (_) {},
+        selectRequested: (_) {},
         restartRequested: _requestRestart,
         gameChangeRequested: _requestGameChange,
       ),
-      noGame: () => event.when(
-        moveRequested: null,
-        selectRequested: null,
-        restartRequested: null,
+      noGame: (_) => event.when(
+        moveRequested: (_) {},
+        selectRequested: (_) {},
+        restartRequested: () {},
         gameChangeRequested: _requestGameChange,
       ),
     );
-    yield _getStateFromGame(_game);
+    yield _getStateFromGame();
+  }
+
+  void _performOrCrash(void Function(Game) function) {
+    _gameOption.fold(() => throw NoGameError(), function);
   }
 
   void _requestMove(Move move) {
-    _game.moveSelected(move);
+    _performOrCrash((game) => game.moveSelected(move));
   }
 
   void _requestSelect(Coordinates c) {
-    _game.selected = some(c);
+    _performOrCrash((game) => game.selectedOption = some(c));
   }
 
   void _requestRestart() {
-    _game.restart();
+    _performOrCrash((game) => game.restart());
   }
 
-  // ignore: use_setters_to_change_properties
   void _requestGameChange(Game g) {
-    _game = g;
+    _gameOption = some(g);
   }
 
-  static GameState _getStateFromGame(Game game) {
-    if (game.isWin()) {
-      return GameState.gameOver(
-        board: game.currentBoard,
-      );
-    } else {
-      return GameState.gameOn(
-        board: game.currentBoard,
-        selected: game.selected,
-        moveFailure: game.moveFailure,
-      );
-    }
+  GameState _getStateFromGame() {
+    return _gameOption.fold(
+      () => const GameState.noGame(),
+      (game) {
+        if (game.isWin()) {
+          return GameState.gameOver(
+            board: game.currentBoard,
+          );
+        } else {
+          return GameState.gameOn(
+            board: game.currentBoard,
+            selectedOption: game.selectedOption,
+            moveFailureOption: game.moveFailureOption,
+          );
+        }
+      },
+    );
   }
 }

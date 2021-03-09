@@ -25,17 +25,13 @@ class _$PieceTearOff {
   const _$PieceTearOff();
 
 // ignore: unused_element
-  Shuttle shuttle(Coordinates c) {
-    return Shuttle(
-      c,
-    );
+  Shuttle shuttle() {
+    return const Shuttle();
   }
 
 // ignore: unused_element
-  Pawn pawn(Coordinates c) {
-    return Pawn(
-      c,
-    );
+  Pawn pawn() {
+    return const Pawn();
   }
 
 // ignore: unused_element
@@ -50,17 +46,15 @@ const $Piece = _$PieceTearOff();
 
 /// @nodoc
 mixin _$Piece {
-  Coordinates get c;
-
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult shuttle(Coordinates c),
-    @required TResult pawn(Coordinates c),
+    @required TResult shuttle(),
+    @required TResult pawn(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult shuttle(Coordinates c),
-    TResult pawn(Coordinates c),
+    TResult shuttle(),
+    TResult pawn(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -75,17 +69,12 @@ mixin _$Piece {
     @required TResult orElse(),
   });
   Map<String, dynamic> toJson();
-  @JsonKey(ignore: true)
-  $PieceCopyWith<Piece> get copyWith;
 }
 
 /// @nodoc
 abstract class $PieceCopyWith<$Res> {
   factory $PieceCopyWith(Piece value, $Res Function(Piece) then) =
       _$PieceCopyWithImpl<$Res>;
-  $Res call({Coordinates c});
-
-  $CoordinatesCopyWith<$Res> get c;
 }
 
 /// @nodoc
@@ -95,36 +84,12 @@ class _$PieceCopyWithImpl<$Res> implements $PieceCopyWith<$Res> {
   final Piece _value;
   // ignore: unused_field
   final $Res Function(Piece) _then;
-
-  @override
-  $Res call({
-    Object c = freezed,
-  }) {
-    return _then(_value.copyWith(
-      c: c == freezed ? _value.c : c as Coordinates,
-    ));
-  }
-
-  @override
-  $CoordinatesCopyWith<$Res> get c {
-    if (_value.c == null) {
-      return null;
-    }
-    return $CoordinatesCopyWith<$Res>(_value.c, (value) {
-      return _then(_value.copyWith(c: value));
-    });
-  }
 }
 
 /// @nodoc
-abstract class $ShuttleCopyWith<$Res> implements $PieceCopyWith<$Res> {
+abstract class $ShuttleCopyWith<$Res> {
   factory $ShuttleCopyWith(Shuttle value, $Res Function(Shuttle) then) =
       _$ShuttleCopyWithImpl<$Res>;
-  @override
-  $Res call({Coordinates c});
-
-  @override
-  $CoordinatesCopyWith<$Res> get c;
 }
 
 /// @nodoc
@@ -135,72 +100,51 @@ class _$ShuttleCopyWithImpl<$Res> extends _$PieceCopyWithImpl<$Res>
 
   @override
   Shuttle get _value => super._value as Shuttle;
-
-  @override
-  $Res call({
-    Object c = freezed,
-  }) {
-    return _then(Shuttle(
-      c == freezed ? _value.c : c as Coordinates,
-    ));
-  }
 }
 
 @JsonSerializable()
 
 /// @nodoc
 class _$Shuttle implements Shuttle {
-  const _$Shuttle(this.c) : assert(c != null);
+  const _$Shuttle();
 
   factory _$Shuttle.fromJson(Map<String, dynamic> json) =>
       _$_$ShuttleFromJson(json);
 
   @override
-  final Coordinates c;
-
-  @override
   String toString() {
-    return 'Piece.shuttle(c: $c)';
+    return 'Piece.shuttle()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Shuttle &&
-            (identical(other.c, c) ||
-                const DeepCollectionEquality().equals(other.c, c)));
+    return identical(this, other) || (other is Shuttle);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(c);
-
-  @JsonKey(ignore: true)
-  @override
-  $ShuttleCopyWith<Shuttle> get copyWith =>
-      _$ShuttleCopyWithImpl<Shuttle>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult shuttle(Coordinates c),
-    @required TResult pawn(Coordinates c),
+    @required TResult shuttle(),
+    @required TResult pawn(),
   }) {
     assert(shuttle != null);
     assert(pawn != null);
-    return shuttle(c);
+    return shuttle();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult shuttle(Coordinates c),
-    TResult pawn(Coordinates c),
+    TResult shuttle(),
+    TResult pawn(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (shuttle != null) {
-      return shuttle(c);
+      return shuttle();
     }
     return orElse();
   }
@@ -237,26 +181,15 @@ class _$Shuttle implements Shuttle {
 }
 
 abstract class Shuttle implements Piece {
-  const factory Shuttle(Coordinates c) = _$Shuttle;
+  const factory Shuttle() = _$Shuttle;
 
   factory Shuttle.fromJson(Map<String, dynamic> json) = _$Shuttle.fromJson;
-
-  @override
-  Coordinates get c;
-  @override
-  @JsonKey(ignore: true)
-  $ShuttleCopyWith<Shuttle> get copyWith;
 }
 
 /// @nodoc
-abstract class $PawnCopyWith<$Res> implements $PieceCopyWith<$Res> {
+abstract class $PawnCopyWith<$Res> {
   factory $PawnCopyWith(Pawn value, $Res Function(Pawn) then) =
       _$PawnCopyWithImpl<$Res>;
-  @override
-  $Res call({Coordinates c});
-
-  @override
-  $CoordinatesCopyWith<$Res> get c;
 }
 
 /// @nodoc
@@ -267,71 +200,50 @@ class _$PawnCopyWithImpl<$Res> extends _$PieceCopyWithImpl<$Res>
 
   @override
   Pawn get _value => super._value as Pawn;
-
-  @override
-  $Res call({
-    Object c = freezed,
-  }) {
-    return _then(Pawn(
-      c == freezed ? _value.c : c as Coordinates,
-    ));
-  }
 }
 
 @JsonSerializable()
 
 /// @nodoc
 class _$Pawn implements Pawn {
-  const _$Pawn(this.c) : assert(c != null);
+  const _$Pawn();
 
   factory _$Pawn.fromJson(Map<String, dynamic> json) => _$_$PawnFromJson(json);
 
   @override
-  final Coordinates c;
-
-  @override
   String toString() {
-    return 'Piece.pawn(c: $c)';
+    return 'Piece.pawn()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Pawn &&
-            (identical(other.c, c) ||
-                const DeepCollectionEquality().equals(other.c, c)));
+    return identical(this, other) || (other is Pawn);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(c);
-
-  @JsonKey(ignore: true)
-  @override
-  $PawnCopyWith<Pawn> get copyWith =>
-      _$PawnCopyWithImpl<Pawn>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult shuttle(Coordinates c),
-    @required TResult pawn(Coordinates c),
+    @required TResult shuttle(),
+    @required TResult pawn(),
   }) {
     assert(shuttle != null);
     assert(pawn != null);
-    return pawn(c);
+    return pawn();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult shuttle(Coordinates c),
-    TResult pawn(Coordinates c),
+    TResult shuttle(),
+    TResult pawn(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (pawn != null) {
-      return pawn(c);
+      return pawn();
     }
     return orElse();
   }
@@ -368,13 +280,7 @@ class _$Pawn implements Pawn {
 }
 
 abstract class Pawn implements Piece {
-  const factory Pawn(Coordinates c) = _$Pawn;
+  const factory Pawn() = _$Pawn;
 
   factory Pawn.fromJson(Map<String, dynamic> json) = _$Pawn.fromJson;
-
-  @override
-  Coordinates get c;
-  @override
-  @JsonKey(ignore: true)
-  $PawnCopyWith<Pawn> get copyWith;
 }

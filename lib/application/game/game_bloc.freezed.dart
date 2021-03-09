@@ -600,12 +600,12 @@ class _$GameStateTearOff {
 // ignore: unused_element
   GameOn gameOn(
       {@required Board board,
-      @required Option<Coordinates> selected,
-      @required Option<MoveFailure> moveFailure}) {
+      @required Option<Coordinates> selectedOption,
+      @required Option<MoveFailure> moveFailureOption}) {
     return GameOn(
       board: board,
-      selected: selected,
-      moveFailure: moveFailure,
+      selectedOption: selectedOption,
+      moveFailureOption: moveFailureOption,
     );
   }
 
@@ -631,15 +631,15 @@ mixin _$GameState {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult gameOn(Board board, Option<Coordinates> selected,
-            Option<MoveFailure> moveFailure),
+        TResult gameOn(Board board, Option<Coordinates> selectedOption,
+            Option<MoveFailure> moveFailureOption),
     @required TResult gameOver(Board board),
     @required TResult noGame(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult gameOn(Board board, Option<Coordinates> selected,
-        Option<MoveFailure> moveFailure),
+    TResult gameOn(Board board, Option<Coordinates> selectedOption,
+        Option<MoveFailure> moveFailureOption),
     TResult gameOver(Board board),
     TResult noGame(),
     @required TResult orElse(),
@@ -680,8 +680,8 @@ abstract class $GameOnCopyWith<$Res> {
       _$GameOnCopyWithImpl<$Res>;
   $Res call(
       {Board board,
-      Option<Coordinates> selected,
-      Option<MoveFailure> moveFailure});
+      Option<Coordinates> selectedOption,
+      Option<MoveFailure> moveFailureOption});
 }
 
 /// @nodoc
@@ -696,17 +696,17 @@ class _$GameOnCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object board = freezed,
-    Object selected = freezed,
-    Object moveFailure = freezed,
+    Object selectedOption = freezed,
+    Object moveFailureOption = freezed,
   }) {
     return _then(GameOn(
       board: board == freezed ? _value.board : board as Board,
-      selected: selected == freezed
-          ? _value.selected
-          : selected as Option<Coordinates>,
-      moveFailure: moveFailure == freezed
-          ? _value.moveFailure
-          : moveFailure as Option<MoveFailure>,
+      selectedOption: selectedOption == freezed
+          ? _value.selectedOption
+          : selectedOption as Option<Coordinates>,
+      moveFailureOption: moveFailureOption == freezed
+          ? _value.moveFailureOption
+          : moveFailureOption as Option<MoveFailure>,
     ));
   }
 }
@@ -715,22 +715,22 @@ class _$GameOnCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res>
 class _$GameOn implements GameOn {
   const _$GameOn(
       {@required this.board,
-      @required this.selected,
-      @required this.moveFailure})
+      @required this.selectedOption,
+      @required this.moveFailureOption})
       : assert(board != null),
-        assert(selected != null),
-        assert(moveFailure != null);
+        assert(selectedOption != null),
+        assert(moveFailureOption != null);
 
   @override
   final Board board;
   @override
-  final Option<Coordinates> selected;
+  final Option<Coordinates> selectedOption;
   @override
-  final Option<MoveFailure> moveFailure;
+  final Option<MoveFailure> moveFailureOption;
 
   @override
   String toString() {
-    return 'GameState.gameOn(board: $board, selected: $selected, moveFailure: $moveFailure)';
+    return 'GameState.gameOn(board: $board, selectedOption: $selectedOption, moveFailureOption: $moveFailureOption)';
   }
 
   @override
@@ -739,20 +739,20 @@ class _$GameOn implements GameOn {
         (other is GameOn &&
             (identical(other.board, board) ||
                 const DeepCollectionEquality().equals(other.board, board)) &&
-            (identical(other.selected, selected) ||
+            (identical(other.selectedOption, selectedOption) ||
                 const DeepCollectionEquality()
-                    .equals(other.selected, selected)) &&
-            (identical(other.moveFailure, moveFailure) ||
+                    .equals(other.selectedOption, selectedOption)) &&
+            (identical(other.moveFailureOption, moveFailureOption) ||
                 const DeepCollectionEquality()
-                    .equals(other.moveFailure, moveFailure)));
+                    .equals(other.moveFailureOption, moveFailureOption)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(board) ^
-      const DeepCollectionEquality().hash(selected) ^
-      const DeepCollectionEquality().hash(moveFailure);
+      const DeepCollectionEquality().hash(selectedOption) ^
+      const DeepCollectionEquality().hash(moveFailureOption);
 
   @JsonKey(ignore: true)
   @override
@@ -763,29 +763,29 @@ class _$GameOn implements GameOn {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult gameOn(Board board, Option<Coordinates> selected,
-            Option<MoveFailure> moveFailure),
+        TResult gameOn(Board board, Option<Coordinates> selectedOption,
+            Option<MoveFailure> moveFailureOption),
     @required TResult gameOver(Board board),
     @required TResult noGame(),
   }) {
     assert(gameOn != null);
     assert(gameOver != null);
     assert(noGame != null);
-    return gameOn(board, selected, moveFailure);
+    return gameOn(board, selectedOption, moveFailureOption);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult gameOn(Board board, Option<Coordinates> selected,
-        Option<MoveFailure> moveFailure),
+    TResult gameOn(Board board, Option<Coordinates> selectedOption,
+        Option<MoveFailure> moveFailureOption),
     TResult gameOver(Board board),
     TResult noGame(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (gameOn != null) {
-      return gameOn(board, selected, moveFailure);
+      return gameOn(board, selectedOption, moveFailureOption);
     }
     return orElse();
   }
@@ -822,12 +822,12 @@ class _$GameOn implements GameOn {
 abstract class GameOn implements GameState {
   const factory GameOn(
       {@required Board board,
-      @required Option<Coordinates> selected,
-      @required Option<MoveFailure> moveFailure}) = _$GameOn;
+      @required Option<Coordinates> selectedOption,
+      @required Option<MoveFailure> moveFailureOption}) = _$GameOn;
 
   Board get board;
-  Option<Coordinates> get selected;
-  Option<MoveFailure> get moveFailure;
+  Option<Coordinates> get selectedOption;
+  Option<MoveFailure> get moveFailureOption;
   @JsonKey(ignore: true)
   $GameOnCopyWith<GameOn> get copyWith;
 }
@@ -891,8 +891,8 @@ class _$GameOver implements GameOver {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult gameOn(Board board, Option<Coordinates> selected,
-            Option<MoveFailure> moveFailure),
+        TResult gameOn(Board board, Option<Coordinates> selectedOption,
+            Option<MoveFailure> moveFailureOption),
     @required TResult gameOver(Board board),
     @required TResult noGame(),
   }) {
@@ -905,8 +905,8 @@ class _$GameOver implements GameOver {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult gameOn(Board board, Option<Coordinates> selected,
-        Option<MoveFailure> moveFailure),
+    TResult gameOn(Board board, Option<Coordinates> selectedOption,
+        Option<MoveFailure> moveFailureOption),
     TResult gameOver(Board board),
     TResult noGame(),
     @required TResult orElse(),
@@ -992,8 +992,8 @@ class _$NoGame implements NoGame {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult gameOn(Board board, Option<Coordinates> selected,
-            Option<MoveFailure> moveFailure),
+        TResult gameOn(Board board, Option<Coordinates> selectedOption,
+            Option<MoveFailure> moveFailureOption),
     @required TResult gameOver(Board board),
     @required TResult noGame(),
   }) {
@@ -1006,8 +1006,8 @@ class _$NoGame implements NoGame {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult gameOn(Board board, Option<Coordinates> selected,
-        Option<MoveFailure> moveFailure),
+    TResult gameOn(Board board, Option<Coordinates> selectedOption,
+        Option<MoveFailure> moveFailureOption),
     TResult gameOver(Board board),
     TResult noGame(),
     @required TResult orElse(),

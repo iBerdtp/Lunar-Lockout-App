@@ -17,6 +17,7 @@ abstract class MoveButton extends StatelessWidget {
       // TODO Theme colors
       backgroundColor: Colors.grey[800],
       foregroundColor: Colors.black,
+      heroTag: "movebtn$direction",
       child: Icon(iconData),
     );
   }
